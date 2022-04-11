@@ -1,7 +1,7 @@
 Name:           ea-nginx-gzip
 Version:        1.0
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4552 for more details
-%define release_prefix 2
+%define release_prefix 3
 Release:        %{release_prefix}%{?dist}.cpanel
 Summary:        Enable gzip config for ea-nginx
 License:        GPL
@@ -10,9 +10,6 @@ URL:            http://www.cpanel.net
 Vendor:         cPanel, Inc.
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:       ea-nginx
-
-Provides:       ea-nginx-compression
-Conflicts:      ea-nginx-compression
 
 Source0:        gzip.conf
 
@@ -44,6 +41,9 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/nginx/conf.d/gzip.conf
 
 %changelog
+* Mon Apr 11 2022 Dan Muey <dan@cpanel.net> - 1.0-3
+- ZC-9902: remove conflict w/ brotli
+
 * Thu Feb 24 2022 Dan Muey <dan@cpanel.net> - 1.0-2
 - ZC-9757: changes for co-existence w/ brotli compression
 
